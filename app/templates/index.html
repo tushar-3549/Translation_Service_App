@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Translation Service</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+            background-color: #000203;
+            display: flex;
+            flex-direction: column;
+        }
+        .navbar {
+            background-color: #007bff;
+        }
+        .navbar-brand, .navbar-text {
+            font-weight: bold;
+        }
+        .content {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .form-box {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-label {
+            font-weight: 600;
+            color: #007bff;
+        }
+        .form-control {
+            border-radius: 4px;
+            border: 1px solid #007bff;
+        }
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        input, textarea {
+            margin-top: 3px;
+            border-radius: 5px;
+            border: 1px solid #007bff;
+            padding: 8px;
+            font-size: 12px;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #0056b3;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+        }
+
+        textarea {
+            resize: vertical;  
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+        .footer {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+          <h4 style="color: aliceblue; margin-left: 12px;">Translation Service</h4>
+        </div>
+    </nav>
+
+    <div class="content">
+        <div class="form-container">
+            <h2>Translation App</h2>
+            <div class="form-box">
+                <label for="text" class="form-label">Text to Translate</label>
+                <textarea id="text" class="form-control" rows="6" placeholder="Enter text to be translated..."></textarea>
+            </div>
+            <div class="form-box">
+                <label for="languages" class="form-label">Languages (Comma separated)</label>
+                <!-- <small class="form-text text-muted">Comma separated</small> -->
+                <input id="languages" class="form-control" type="text" placeholder="e.g., English, Bangla, Urdu">
+            </div>
+            <div class="btn-container">
+                <button class="btn btn-primary" onclick="translateText()">Translate</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        &copy; 2025 Translator Service By Tushar
+    </div>
+</body>
+</html>
