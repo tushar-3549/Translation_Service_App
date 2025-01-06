@@ -11,7 +11,7 @@
             height: 100%;
             margin: 0;
             font-family: 'Arial', sans-serif;
-            background-color: #000203;
+            background-color: #e0ecf1;
             display: flex;
             flex-direction: column;
         }
@@ -25,8 +25,8 @@
             flex: 1;
             display: flex;
             justify-content: center;
-            align-items: center;
-            padding: 20px;
+            /* align-items: center; */
+            padding: 15px;
         }
         .form-container {
             background-color: white;
@@ -70,6 +70,10 @@
             font-size: 12px;
         }
 
+        button {
+            cursor: pointer;
+        }
+
         input:focus, textarea:focus {
             border-color: #0056b3;
             outline: none;
@@ -92,6 +96,25 @@
             position: fixed;
             bottom: 0;
         }
+        .check-section {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        .check-section input {
+            flex: 2;
+        }
+        .check-section button {
+            flex: 1;
+        }
+        .btn-secondary {
+            background-color: #6c757d;
+            border: none;
+        }
+        .btn-secondary:hover {
+            background-color: #5a6268;
+        }
     </style>
 </head>
 <body>
@@ -106,15 +129,30 @@
             <h2>Translation App</h2>
             <div class="form-box">
                 <label for="text" class="form-label">Text to Translate</label>
-                <textarea id="text" class="form-control" rows="6" placeholder="Enter text to be translated..."></textarea>
+                <textarea id="textToTranslate" class="form-control" rows="3" placeholder="Enter text to be translated..."></textarea>
             </div>
             <div class="form-box">
                 <label for="languages" class="form-label">Languages (Comma separated)</label>
-                <!-- <small class="form-text text-muted">Comma separated</small> -->
                 <input id="languages" class="form-control" type="text" placeholder="e.g., English, Bangla, Urdu">
             </div>
             <div class="btn-container">
-                <button class="btn btn-primary" onclick="translateText()">Translate</button>
+                <button class="btn btn-primary" onclick="submitTranslate()">Translate</button>
+            </div>
+
+            <div class="mt-4 check-section">
+                <input type="number" id="search-id" class="form-control" placeholder="Check Translation By ID">
+                <button id="search-button" class="btn btn-info" onclick="checkTranslationStatus()">Check Status</button>
+                <button id="content-button" class="btn btn-secondary" onclick="checkTranslationContent()">Check Content</button>
+            </div>
+
+            <div class="mt-4" id="status-container" style="display: none;">
+                <h4>Translation Status</h4>
+                <pre id="statusResult"></pre>
+            </div>
+
+            <div class="mt-4" id="content-container" style="display: none;">
+                <h4>Translation Content</h4>
+                <pre id="contentResult"></pre>
             </div>
         </div>
     </div>
@@ -122,5 +160,117 @@
     <div class="footer">
         &copy; 2025 Translator Service By Tushar
     </div>
+
+
+    <script>
+        // Function to submit translation request
+        async function submitTranslate() {
+            const text = document.getElementById("textToTranslate").value.trim();
+            const languages = document.getElementById("languages").value.trim();
+    
+            if (!text || !languages) {
+                alert("Please enter text and languages!");
+                return;
+            }
+    
+            // Display progress bar
+            showProgress();
+    
+            try {
+                const response = await fetch("/api/translate", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ text, languages })
+                });
+    
+                if (!response.ok) {
+                    throw new Error("Translation request failed.");
+                }
+    
+                const data = await response.json();
+                alert(`Translation submitted successfully! Translation ID: ${data.translation_id}`);
+    
+                // Hide progress bar
+                hideProgress();
+    
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Failed to submit translation.");
+                hideProgress();
+            }
+        }
+    
+        // Function to check translation status
+        async function checkTranslationStatus() {
+            const translationId = document.getElementById("search-id").value.trim();
+    
+            if (!translationId) {
+                alert("Please enter a Translation ID!");
+                return;
+            }
+    
+            try {
+                const response = await fetch(`/api/translate/status/${translationId}`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch translation status.");
+                }
+    
+                const data = await response.json();
+                document.getElementById("status-container").style.display = "block";
+                document.getElementById("statusResult").textContent = `Status: ${data.status}`;
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Failed to fetch translation status.");
+            }
+        }
+    
+        // Function to check translation content
+        async function checkTranslationContent() {
+            const translationId = document.getElementById("search-id").value.trim();
+    
+            if (!translationId) {
+                alert("Please enter a Translation ID!");
+                return;
+            }
+    
+            try {
+                const response = await fetch(`/api/translate/content/${translationId}`);
+                if (!response.ok) {
+                    throw new Error("Failed to fetch translation content.");
+                }
+    
+                const data = await response.json();
+                document.getElementById("content-container").style.display = "block";
+                document.getElementById("contentResult").textContent = data.translation;
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Failed to fetch translation content.");
+            }
+        }
+    
+        // Show progress bar
+        function showProgress() {
+            const progressBar = document.createElement("div");
+            progressBar.id = "progress-bar";
+            progressBar.className = "progress-bar progress-bar-striped progress-bar-animated";
+            progressBar.style.width = "100%";
+    
+            const progressContainer = document.createElement("div");
+            progressContainer.className = "progress mt-4";
+            progressContainer.appendChild(progressBar);
+    
+            document.querySelector(".form-container").appendChild(progressContainer);
+        }
+    
+        // Hide progress bar
+        function hideProgress() {
+            const progressContainer = document.querySelector(".progress");
+            if (progressContainer) {
+                progressContainer.remove();
+            }
+        }
+    </script>
+    
+    
 </body>
 </html>
