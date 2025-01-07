@@ -25,7 +25,6 @@
             flex: 1;
             display: flex;
             justify-content: center;
-            /* align-items: center; */
             padding: 15px;
         }
         .form-container {
@@ -188,7 +187,7 @@
                 }
     
                 const data = await response.json();
-                alert(`Translation submitted successfully! Translation ID: ${data.translation_id}`);
+                alert(`Translation submitted successfully! Translation ID: ${data.task_id}`);
     
                 // Hide progress bar
                 hideProgress();
@@ -210,7 +209,7 @@
             }
     
             try {
-                const response = await fetch(`/api/translate/status/${translationId}`);
+                const response = await fetch(`/translate/${translationId}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch translation status.");
                 }
@@ -234,14 +233,14 @@
             }
     
             try {
-                const response = await fetch(`/api/translate/content/${translationId}`);
+                const response = await fetch(`/translate/content/${translationId}`);
                 if (!response.ok) {
                     throw new Error("Failed to fetch translation content.");
                 }
     
                 const data = await response.json();
                 document.getElementById("content-container").style.display = "block";
-                document.getElementById("contentResult").textContent = data.translation;
+                document.getElementById("contentResult").textContent = JSON.stringify(data.translations, null, 2);
             } catch (error) {
                 console.error("Error:", error);
                 alert("Failed to fetch translation content.");

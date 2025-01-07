@@ -11,4 +11,4 @@ class TaskResponse(BaseModel):
 class TranslationStatus(BaseModel):
     task_id: int
     status: str
-    translations: Dict[str]
+    translations: Dict[str, str]
