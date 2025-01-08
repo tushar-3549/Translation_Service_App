@@ -9,4 +9,4 @@ class TranslationTask(Base):
     text = Column(Text, nullable=False)
     languages = Column(JSON, nullable=False)
     status = Column(String, default="in progress")
-    translation = Column(JSON, default={})
+    translations = Column(JSON, default={})
