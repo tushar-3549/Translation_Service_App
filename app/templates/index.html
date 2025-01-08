@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,141 +8,174 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <style>
-        body, html {
+        html,
+        body {
             height: 100%;
             margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #e0ecf1;
             display: flex;
             flex-direction: column;
         }
+
         .navbar {
             background-color: #007bff;
-        }
-        .navbar-brand, .navbar-text {
+            width: 100%;
+            color: #fff;
             font-weight: bold;
         }
+
         .content {
             flex: 1;
             display: flex;
             justify-content: center;
-            padding: 15px;
+            align-items: center;
+            padding: 20px;
+            width: 100%;
         }
+
         .form-container {
             background-color: white;
             padding: 30px;
             border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
             width: 100%;
-            max-width: 800px;
         }
-        .form-container h2 {
+
+        h4 {
             text-align: center;
             color: #007bff;
             margin-bottom: 20px;
         }
-        .form-box {
-            margin-bottom: 15px;
-            display: flex;
-            flex-direction: column;
+
+        .form-group {
+            margin-bottom: 20px;
         }
-        .form-label {
-            font-weight: 600;
-            color: #007bff;
+
+        .form-group label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
         }
+
         .form-control {
-            border-radius: 4px;
-            border: 1px solid #007bff;
-        }
-        .btn-primary {
-            background-color: #007bff;
-            border: none;
             width: 100%;
             padding: 10px;
-            border-radius: 5px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background-color: #007bff;
+            border: none;
+            padding: 10px;
+            border-radius: 4px;
             font-size: 16px;
-        }
-        input, textarea {
-            margin-top: 3px;
-            border-radius: 5px;
-            border: 1px solid #007bff;
-            padding: 8px;
-            font-size: 12px;
-        }
-
-        button {
+            color: white;
+            font-weight: bold;
             cursor: pointer;
-        }
-
-        input:focus, textarea:focus {
-            border-color: #0056b3;
-            outline: none;
-            box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
-        }
-
-        textarea {
-            resize: vertical;  
+            transition: background-color 0.3s;
         }
 
         .btn-primary:hover {
             background-color: #0056b3;
         }
+
+        .btn-info,
+        .btn-secondary {
+            width: 48%;
+            padding: 10px;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-info {
+            background-color: #17a2b8;
+            color: white;
+        }
+
+        .btn-info:hover {
+            background-color: #117a8b;
+        }
+
+        .btn-secondary {
+            background-color: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #495057;
+        }
+
+        .check-buttons {
+            display: flex;
+            justify-content: space-between;
+            gap: 4%;
+            margin-top: 10px;
+        }
+
         .footer {
             background-color: #007bff;
             color: white;
             text-align: center;
-            padding: 10px 0;
             width: 100%;
-            position: fixed;
-            bottom: 0;
-        }
-        .check-section {
-            display: flex;
-            gap: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-        }
-        .check-section input {
-            flex: 2;
-        }
-        .check-section button {
-            flex: 1;
-        }
-        .btn-secondary {
-            background-color: #6c757d;
-            border: none;
-        }
-        .btn-secondary:hover {
-            background-color: #5a6268;
+            font-size: 12px;
+            margin-top: auto;
         }
     </style>
+
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
-          <h4 style="color: aliceblue; margin-left: 12px;">Translation Service</h4>
+            <h6 style="color: aliceblue;">Translation Service</h4>
         </div>
     </nav>
 
     <div class="content">
         <div class="form-container">
-            <h2>Translation App</h2>
-            <div class="form-box">
-                <label for="text" class="form-label">Text to Translate</label>
-                <textarea id="textToTranslate" class="form-control" rows="3" placeholder="Enter text to be translated..."></textarea>
-            </div>
-            <div class="form-box">
-                <label for="languages" class="form-label">Languages (Comma separated)</label>
-                <input id="languages" class="form-control" type="text" placeholder="e.g., English, Bangla, Urdu">
-            </div>
-            <div class="btn-container">
-                <button class="btn btn-primary" onclick="submitTranslate()">Translate</button>
+            <h4>Translation App</h2>
+            <form action="" id="translationForm">
+                <div class="form-group">
+                    <label for="textToTranslate">Text to translate</label>
+                    <textarea class="form-control" name="" id="textToTranslate" rows="3"
+                        placeholder="Enter text here"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="languages">Languages (Comma Separated)</label>
+                    <input type="text" class="form-control" id="languages" placeholder="eg.,eng, bn, fr">
+                </div>
+                <button type="button" class="btn btn-primary translate-button"
+                    onclick="submitTranslation()">Translate</button>
+
+            </form>
+
+            <div class="mt-4" id="results" style="display: none;">
+                <h4>Translation Result</h4>
+                <pre id="translationResults"></pre>
             </div>
 
-            <div class="mt-4 check-section">
-                <input type="number" id="search-id" class="form-control" placeholder="Check Translation By ID">
-                <button id="search-button" class="btn btn-info" onclick="checkTranslationStatus()">Check Status</button>
-                <button id="content-button" class="btn btn-secondary" onclick="checkTranslationContent()">Check Content</button>
+            <div class="mt-4" id="prohress-container">
+                <h6 id="progress-text">Translation in Progress...</h6>
+                <div class="progress">
+                    <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated"></div>
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <label for="search-id">Check Translation by ID</label>
+                <input type="number" id="search-id" class="form-control" placeholder="Enter Translation ID">
+                <button id="search-button" class="btn btn-info mt-2" onclick="checkTranslationStatus()">Check
+                    Status</button>
+                <button id="content-button" class="btn btn-secondary mt-2" onclick="checkTranslationContent()">Check
+                    Content</button>
             </div>
 
             <div class="mt-4" id="status-container" style="display: none;">
@@ -153,7 +187,9 @@
                 <h4>Translation Content</h4>
                 <pre id="contentResult"></pre>
             </div>
+
         </div>
+
     </div>
 
     <div class="footer">
@@ -161,115 +197,88 @@
     </div>
 
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+
     <script>
-        // Function to submit translation request
-        async function submitTranslate() {
-            const text = document.getElementById("textToTranslate").value.trim();
-            const languages = document.getElementById("languages").value.trim();
-    
-            if (!text || !languages) {
-                alert("Please enter text and languages!");
+        async function submitTranslation() {
+            const text = document.getElementById('textToTranslate').value;
+            const languages = document.getElementById('languages').value.split(',').map(lang => lang.trim());
+
+            if (!text || languages === 0 || languages[0] ==="") {
+                alert("Please provide both text and target languages.");
                 return;
             }
-    
-            // Display progress bar
-            showProgress();
-    
+            const progressBar = document.getElementById('progress-bar');
+            const progressText = document.getElementById('progress-text');
+
+            progressBar.classList.remove('bg-success');
+            progressBar.classList.add('bg-primary');
+            progressBar.style.width = '0%';
+            progressText.textContent = 'Translation in progress...';
+
             try {
-                const response = await fetch("/api/translate", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ text, languages })
+                const response = await axios.post('http://localhost:8000/translate', {
+                    text: text,
+                    languages: languages
                 });
-    
-                if (!response.ok) {
-                    throw new Error("Translation request failed.");
-                }
-    
-                const data = await response.json();
-                alert(`Translation submitted successfully! Translation ID: ${data.task_id}`);
-    
-                // Hide progress bar
-                hideProgress();
-    
+
+                const taskId = response.data.task_id;
+                alert(`Task ID: ${taskId}`);
+                document.getElementById('progress-container').style.display = 'none';
+                document.getElementById('results').style.display = 'none';
+                document.getElementById('status-container').style.display = 'none';
+                document.getElementById('content-container').style.display = 'none';
+
+
+                let translationResult = null;
+                let progress = 0;
+
+                while (progress < 100) {
+                    await new Promise(resolve => setTimeout(resolve, 1000)); 
+                    const resultResponse = await axios.get(`http://localhost:8000/translate/${taskId}`); 
+                    translationResult = resultResponse.data;
+
+                    if (translationResult === 'completed') {  
+                        progress = 100;
+                    } else {
+                        progress.style.width = `50%`;
+                    }
+
+                }    
+
+                progressBar.classList.remove("bg-primary");
+                progressBar.classList.add('bg-success');
+                progressBar.style.width = `100%`;
+                progressText.textContent = 'Translation completed!';
+                    
+                document.getElementById('translationResults').textContent = JSON.stringify(translationResult.translations, null, 2); 
+                document.getElementById('results').style.display = 'block'; 
+                    
+                
+
+
             } catch (error) {
-                console.error("Error:", error);
-                alert("Failed to submit translation.");
-                hideProgress();
+                console.error("Error occurred while submitting translation:", error);
+                alert("Failed to submit translation. Please try again.");
             }
+
         }
-    
-        // Function to check translation status
+
         async function checkTranslationStatus() {
-            const translationId = document.getElementById("search-id").value.trim();
-    
-            if (!translationId) {
-                alert("Please enter a Translation ID!");
-                return;
-            }
-    
-            try {
-                const response = await fetch(`/translate/${translationId}`);
-                if (!response.ok) {
-                    throw new Error("Failed to fetch translation status.");
-                }
-    
-                const data = await response.json();
-                document.getElementById("status-container").style.display = "block";
-                document.getElementById("statusResult").textContent = `Status: ${data.status}`;
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Failed to fetch translation status.");
-            }
+            return;
         }
-    
-        // Function to check translation content
         async function checkTranslationContent() {
-            const translationId = document.getElementById("search-id").value.trim();
-    
-            if (!translationId) {
-                alert("Please enter a Translation ID!");
-                return;
-            }
-    
-            try {
-                const response = await fetch(`/translate/content/${translationId}`);
-                if (!response.ok) {
-                    throw new Error("Failed to fetch translation content.");
-                }
-    
-                const data = await response.json();
-                document.getElementById("content-container").style.display = "block";
-                document.getElementById("contentResult").textContent = JSON.stringify(data.translations, null, 2);
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Failed to fetch translation content.");
-            }
+            return;
         }
-    
-        // Show progress bar
-        function showProgress() {
-            const progressBar = document.createElement("div");
-            progressBar.id = "progress-bar";
-            progressBar.className = "progress-bar progress-bar-striped progress-bar-animated";
-            progressBar.style.width = "100%";
-    
-            const progressContainer = document.createElement("div");
-            progressContainer.className = "progress mt-4";
-            progressContainer.appendChild(progressBar);
-    
-            document.querySelector(".form-container").appendChild(progressContainer);
-        }
-    
-        // Hide progress bar
-        function hideProgress() {
-            const progressContainer = document.querySelector(".progress");
-            if (progressContainer) {
-                progressContainer.remove();
-            }
-        }
+
+
+
     </script>
-    
-    
+
 </body>
+
 </html>
